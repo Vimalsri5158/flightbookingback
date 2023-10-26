@@ -26,6 +26,7 @@ authRouter.post("/register", async (req, res) => {
       name: payload.name,
       email: payload.email,
       password: hashedPassword,
+      role: "admin",
     });
 
     // Save the new user to the database
