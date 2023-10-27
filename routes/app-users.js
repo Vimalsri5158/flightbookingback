@@ -11,7 +11,7 @@ authRouter.post("/register", async (req, res) => {
   try {
     const payload = req.body;
 
-    // Check if a user with the same email already exists
+    
     const existingUser = await AppUserModel.findOne({ email: payload.email });
     if (existingUser) {
       return res.status(409).json({ msg: "User already exists" });
@@ -29,7 +29,6 @@ authRouter.post("/register", async (req, res) => {
       role: "admin",
     });
 
-    // Save the new user to the database
     await newUser.save();
 
     res.status(201).json({ msg: "User registered successfully" });
@@ -76,7 +75,6 @@ authRouter.post("/login", async (req, res) => {
     });
 
     if (appUser) {
-      // Compare the provided password with the hashed password in the database
       await bcrypt.compare(
         payload.password,
         appUser.password,
