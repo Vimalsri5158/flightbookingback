@@ -3,9 +3,16 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const cloudMongoUrl = `mongodb+srv://backend:9Z2GXXOW4Batxcr8@cluster0.qoymzsx.mongodb.net/backend?retryWrites=true&w=majority`;
 
-const localMongoUrl = "mongodb://127.0.0.1:27017/backend";
+const username = `backend`;
+const password = `Vimalsri`;
+
+
+const cloudMongoUrl =`mongodb+srv://${username}:${password}@cluster0.qoymzsx.mongodb.net/?retryWrites=true&w=majority`;
+
+
+
+const localMongoUrl ='mongodb://27017/backend'
 
 const connectToDb = async () => {
   try {
