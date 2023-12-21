@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema({
+const flightSchema = new mongoose.Schema({
   id: {
     type: "string",
     required: true,
@@ -36,9 +36,17 @@ const userSchema = new mongoose.Schema({
     type: "string",
     required: true,
   },
+  flightNumber:{
+    type: "string",
+    required: true,
+  },
+  bookingSeats:{
+    type: "string",
+    required: true,
+  }
 });
 
-const userModel = mongoose.model("users", userSchema);
+const flightModel = mongoose.model("users", flightSchema);
 
 const appUserSchema = new mongoose.Schema({
   id: {
@@ -65,4 +73,4 @@ const appUserSchema = new mongoose.Schema({
 
 const AppUserModel = mongoose.model("app-users", appUserSchema);
 
-export { userModel, AppUserModel };
+export { flightModel, AppUserModel };

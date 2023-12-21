@@ -2,17 +2,19 @@ import express from "express";
 
 import { v4 } from "uuid";
 
-import { userModel } from "../routes/models.js";
+import { flightModel } from "../db-utils/models.js";
 
-const userRouter = express.Router();
+const flightRouter = express.Router();
 
 // GET request method
-userRouter.get("/", async (req, res) => {
+flightRouter.get("/", async (req, res) => {
   try {
-    const users = await userModel.find(
+    const users = await flightModel.find(
       {},
       {
         id: 1,
+        flightNumber:1,
+        bookingSeats:1,
         departureDate: 1,
         returnDate: 1,
         children: 1,
@@ -32,11 +34,10 @@ userRouter.get("/", async (req, res) => {
 });
 
 // POST request method
-userRouter.post("/", async (req, res) => {
+flightRouter.post("/", async (req, res) => {
   try {
-    const user = new userModel({ ...req.body, id: v4() });
+    const user = new flightModel({ ...req.body, id: v4() });
     await user.save();
-    res.send({ msg: "User created successfully" });
   } catch (err) {
     console.error(err);
     res.status(500).send({ msg: "Error creating user" });
@@ -44,10 +45,10 @@ userRouter.post("/", async (req, res) => {
 });
 
 // PUT request method
-userRouter.put("/:userId", async (req, res) => {
+flightRouter.put("/:userId", async (req, res) => {
   const { userId } = req.params;
   try {
-    await userModel.updateOne({ id: userId }, { $set: req.body });
+    await flightModel.updateOne({ id: userId }, { $set: req.body });
     res.send({ msg: "User updated successfully" });
   } catch (err) {
     console.error(err);
@@ -56,10 +57,10 @@ userRouter.put("/:userId", async (req, res) => {
 });
 
 // DELETE request method
-userRouter.delete("/:userId", async (req, res) => {
+flightRouter.delete("/:userId", async (req, res) => {
   const { userId } = req.params;
   try {
-    await userModel.deleteOne({ id: userId });
+    await flightModel.deleteOne({ id: userId });
     res.send({ msg: "User deleted successfully" });
   } catch (err) {
     console.error(err);
@@ -67,4 +68,4 @@ userRouter.delete("/:userId", async (req, res) => {
   }
 });
 
-export default userRouter;
+export default flightRouter;

@@ -1,9 +1,11 @@
 import express from "express";
 import jwt from "jsonwebtoken";
 import cors from "cors";
-import connectToDb from "./routes/mongoose-connection.js";
-import userRouter from "./routes/users.js";
+import connectToDb from "./db-utils/mongoose-connection.js";
+// import userRouter from "./routes/users.js";
 import authRouter from "./routes/app-users.js";
+import flightRouter from "./routes/flight.js";
+
 
 const app = express();
 
@@ -45,7 +47,8 @@ const authMiddleware = (req, res, next) => {
 {
   /**route of routers */
 }
-app.use("/users", authMiddleware, userRouter);
+
+app.use("/users", authMiddleware, flightRouter);
 app.use("/auth", authRouter);
 
 app.listen(PORT, () => {

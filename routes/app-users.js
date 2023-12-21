@@ -1,5 +1,5 @@
 import express from "express";
-import { AppUserModel } from "../routes/models.js";
+import { AppUserModel } from "../db-utils/models.js";
 import jwt from "jsonwebtoken";
 import { v4 } from "uuid";
 import bcrypt from "bcrypt";
